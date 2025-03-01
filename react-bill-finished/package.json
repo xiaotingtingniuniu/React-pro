@@ -1,28 +1,26 @@
 {
-  "name": "react-bill-test",
+  "name": "react-bill",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^2.6.0",
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
+    "@reduxjs/toolkit": "^1.9.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "antd-mobile": "^5.38.1",
-    "axios": "^1.8.1",
-    "classnames": "^2.5.1",
-    "dayjs": "^1.11.13",
+    "antd-mobile": "^5.26.0",
+    "axios": "^1.2.0",
+    "classnames": "^2.3.2",
+    "dayjs": "^1.11.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^9.2.0",
-    "react-router-dom": "^7.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.4.4",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "craco start & json-server ./server/data.json --port 8888",
     "build": "craco build",
-    "server":"json-server ./server/data.json  --port 8008",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -46,6 +44,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.1.0",
-    "json-server": "^1.0.0-beta.3"
+    "json-server": "^0.17.2",
+    "sass": "^1.56.1"
   }
 }
