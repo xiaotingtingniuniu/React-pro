@@ -1,0 +1,9 @@
+/* 主题颜色的设置 */
+/* 全局主题颜色 */
+:root:root{
+    --adm-color-primary:rgb(105,174,120);
+}
+/* 局部主题颜色 */
+/* .purple-theme{
+    --adm-color-primary:#a062d4;
+} */
