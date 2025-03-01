@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4842385 */
+  src: url('iconfont.woff2?t=1740748265894') format('woff2'),
+       url('iconfont.woff?t=1740748265894') format('woff'),
+       url('iconfont.ttf?t=1740748265894') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-waimaiyuan-nv:before {
+  content: "\e664";
+}
+
+.icon-tianjia:before {
+  content: "\e600";
+}
+

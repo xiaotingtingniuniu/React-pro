@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello React!</title>
+    <!-- 生产环境会对代码进行压缩和混淆 -->
+     <!-- React相关的一些核心方法 -->
+    <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+    <!-- 和浏览器相关，和操作Dom相关 -->
+    <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+    <!-- script标签默认的type是text/javascript -->
+    <script type="text/javascript">
+        alert(1);
+    </script>
+    <!-- babel是js编译器 -->
+    <script type="text/babel">
+        // 1.text/babel? 使用babel编译器将代码转换为js
+        // 2.为什么js里面可以写html标签。
+            //因为当使用babel编译jsx时会将其转换为React.createElement()函数调用。
+            //从而会被babel转换为js代码
+        // 3.为什么可以写APP标签。 因为通过babel编译jsx后也被编译为一段js代码，
+            //进行了js的方法调用
+        console.log(React,ReactDOM);
+        class App extends React.Component{
+            render(){
+                return <h1>Hello world</h1>
+            }
+        }
+        ReactDOM.render(<App />,document.getElementById('root'))
+    </script>
+</body>
+</html>
