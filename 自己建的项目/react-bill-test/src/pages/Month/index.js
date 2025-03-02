@@ -1,6 +1,6 @@
 import { NavBar, DatePicker} from 'antd-mobile'
 import './index.scss'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import classNames from 'classnames'
 import { useSelector } from 'react-redux'
 import dayjs from 'dayjs'
@@ -9,12 +9,10 @@ import _ from 'lodash'
 const Month = () => {
   //按月做数据的分组
   const billList = useSelector(state=>state.bill).billList;
-  console.log('billList',billList);
   const monthGroup = useMemo(()=>{
     // return 出去计算之后的值
     return _.groupBy(billList,(item)=>dayjs(item.date).format('YYYY-MM'));
   },[billList]);
-  console.log('monthGroup',monthGroup);
   //控制弹框的打开和关闭
   const [dateVisible,setDateVisible] = useState(false);
   //控制时间显示
@@ -37,14 +35,28 @@ const Month = () => {
       income,
       total:income+pay
     }
-  },[currentMonthList])
+  },[currentMonthList]);
+  //初始化时，确定当前月份的数据
+  useEffect(()=>{
+    //确定当前时间
+    const newDate = dayjs(new Date()).format("YYYY-MM");
+    //获取当前时间对应的数组
+    //当前时间对应的数组如果不为[]时
+    if(monthGroup[newDate]){
+      setCurrentMonthList(monthGroup[newDate])
+    }
+
+  },[monthGroup]);
   //确认回调
   const onConfirm = (val) => {
     const formatDate = dayjs(val).format("YYYY-MM");
-    console.log('formatDate',formatDate);
     //存储当前选中月份数组
-    console.log(monthGroup[formatDate])
-    setCurrentMonthList(monthGroup[formatDate]);
+    if(monthGroup[formatDate]){
+      setCurrentMonthList(monthGroup[formatDate]);
+    }else{
+      //如果当前选中月份数组为[]
+      alert(1);
+    }
     setCurrentDate(formatDate);
   }
   return (

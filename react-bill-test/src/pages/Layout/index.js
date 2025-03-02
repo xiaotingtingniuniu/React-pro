@@ -12,7 +12,7 @@ import {
 
 const tabs = [
   {
-    key: '/month',
+    key: '/',
     title: '月度账单',
     icon: <BillOutline />,
   },
@@ -44,6 +44,7 @@ const Layout = () => {
     <div className="layout">
       <div className="container">
         <Outlet />
+
       </div>
       <div className="footer">
         <TabBar onChange={swithRoute}>
