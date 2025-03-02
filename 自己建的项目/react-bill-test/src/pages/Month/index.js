@@ -6,9 +6,10 @@ import { useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 //处理数组的插件
 import _ from 'lodash'
+import DailyBills from './components/DayBills'
 const Month = () => {
-  //按月做数据的分组
   const billList = useSelector(state=>state.bill).billList;
+  //按月做数据的分组
   const monthGroup = useMemo(()=>{
     // return 出去计算之后的值
     return _.groupBy(billList,(item)=>dayjs(item.date).format('YYYY-MM'));
@@ -45,7 +46,6 @@ const Month = () => {
     if(monthGroup[newDate]){
       setCurrentMonthList(monthGroup[newDate])
     }
-
   },[monthGroup]);
   //确认回调
   const onConfirm = (val) => {
@@ -59,6 +59,15 @@ const Month = () => {
     }
     setCurrentDate(formatDate);
   }
+  //计算当前月按照日分组的方法
+  const dayGroup = useMemo(()=>{
+    const groupDate = _.groupBy(currentMonthList,(item)=>dayjs(item.date).format('YYYY-MM-DD'));
+    const keys = Object.keys(groupDate);
+    return {
+      groupDate,
+      keys
+    }
+  },[currentMonthList])
   return (
     <div className="monthlyBill">
       <NavBar className="nav" backIcon={false}>
@@ -102,6 +111,11 @@ const Month = () => {
             onConfirm={(val)=>onConfirm(val)}
           />
         </div>
+        {/* 单日列表统计 */}
+        {dayGroup.keys.map(key=>{
+          return <DailyBills key={key} date={key} billList={dayGroup.groupDate[key]}/>
+        })}
+        
       </div>
     </div >
   )
