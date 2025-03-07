@@ -1,26 +1,44 @@
-import { useState } from 'react'
-//封装自定义Hook
-//问题：布尔值切换的逻辑，当前组件耦合在一起不方便
-//解决思路：自定义Hook
-function useToggle(){
-  //可复用的逻辑代码
-  const [show,setShow] = useState(true);
-  const toggle = ()=>{
-    setShow(!show);
-  }
-  //哪些状态和回调函数需要在其他组件中使用就return出去
-  return {
-    show,
-    toggle
-  }
+import React, { Component } from 'react'
+class Test extends Component{
+    constructor(props){
+        super(props);
+        console.log('props',props);
+        this.state={
+            name:'开始'
+        }
+        
+    }
+    render (){
+        // 点击按钮时，向父组件传送消息
+        return <div onClick={()=>this.props.sendMessage(this.state.name)}>向父组件发送消息</div>
+    }
 }
-function App () {
-  const {show,toggle}=useToggle();
-  return(
-    <div>
-     {show&&<div>this is div</div>}
-     <button onClick={toggle}>切换</button>
-    </div>
-  )
+class App extends Component{
+    constructor(){
+        super();
+        this.state={
+            receivedMessage:''
+        }
+        //绑定handleReceiveMessage方法
+        this.handleReceiveMessage = this.handleReceiveMessage.bind(this);
+    }
+    //定义接收子组件传递过来的消息的方法
+    handleReceiveMessage(props){
+        this.setState({
+            receivedMessage:props
+        });
+    }
+    render (){
+        return (
+            <div>
+                我是App
+                <p>
+                    接收到子组件的消息：{this.state.receivedMessage}
+                </p>
+                {/* 将handleReceiveMessage方法作为props 传递给子组件 */}
+                <Test sendMessage = {this.handleReceiveMessage}></Test>
+            </div>
+        )
+    }
 }
 export default App;
